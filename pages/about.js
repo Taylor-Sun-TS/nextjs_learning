@@ -1,13 +1,20 @@
 import dynamic from 'next/dynamic';
+import HelloBundle from './components/helloBundle';
 
-const DynamicComponent = dynamic(import('./components/hello'))
+const DynamicComponent = dynamic(import('./components/hello'),
+    {
+        ssr: false,
+        loading: () => <p>...</p>
+    }
+)
 
 const About = ({ name }) => (
     <div>
-        <DynamicComponent name={name} />
         <div>
             <p>This is About page</p>
         </div>
+        <DynamicComponent name={name} />
+        <HelloBundle hello1={name} hello2='qaz' />
     </div>
 );
 

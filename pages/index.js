@@ -42,7 +42,7 @@ const Page = ({ stars }) =>
         <br />
         <div>
             Click{' '}
-            <Link href={{ pathname: '/about', query: { name: 'Zeit' }}} prefetch scroll={false}>
+            <Link href={{ pathname: '/about', query: { name: 'Abcd' }}} prefetch scroll={false}>
                 <a>here</a>
             </Link>{' '}
             to read more
