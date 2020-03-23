@@ -1,5 +1,37 @@
 import 'isomorphic-unfetch';
 import Link from 'next/link';
+import Router from 'next/router';
+
+/*
+Router.beforePopState(({ url, as, options }) => {
+    // I only want to allow these two routes!
+    if (as !== "/" || as !== "/other") {
+      // Have SSR render bad routes as a 404.
+      window.location.href = as
+      return false
+    }
+
+    return true
+});
+*/
+
+const handler = () =>
+    Router.push({
+        pathname: '/about',
+        query: { name: 'Zeit' }
+    })
+;
+
+const handleRouteChange = url => {
+    console.log('App is changing to: ', url)
+};
+
+Router.events.on('routeChangeStart', handleRouteChange);
+Router.events.on('routeChangeError', (err, url) => {
+    if (err.cancelled) {
+        console.log(`Route to ${url} was cancelled!`)
+    }
+});
 
 const Page = ({ stars }) =>
     <div>
@@ -10,10 +42,13 @@ const Page = ({ stars }) =>
         <br />
         <div>
             Click{' '}
-            <Link href="/about">
+            <Link href={{ pathname: '/about', query: { name: 'Zeit' }}} prefetch scroll={false}>
                 <a>here</a>
             </Link>{' '}
             to read more
+        </div>
+        <div>
+            Click <span onClick={handler}>here</span> to error age
         </div>
     </div>
 ;
