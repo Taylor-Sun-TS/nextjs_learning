@@ -1,5 +1,6 @@
 #ignore folders
 node_modules
 .next
+build
 
 #ignore files
