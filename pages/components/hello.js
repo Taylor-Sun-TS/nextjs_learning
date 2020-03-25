@@ -1,5 +1,7 @@
+import styles from './hello.module.css';
+
 const Hello = ({ name }) => (
-    <div>
+    <div className={styles.hello}>
         Hello {name}
     </div>
 );

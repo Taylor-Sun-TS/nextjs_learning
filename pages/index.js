@@ -1,6 +1,6 @@
-import 'isomorphic-unfetch';
 import Link from 'next/link';
 import Router from 'next/router';
+import fetch from 'isomorphic-unfetch';
 
 /*
 Router.beforePopState(({ url, as, options }) => {
@@ -33,30 +33,31 @@ Router.events.on('routeChangeError', (err, url) => {
     }
 });
 
-const Page = ({ stars }) =>
+const Page = ({ stars, errorStatus }) =>
     <div>
         <h1>Welcome to next.js!</h1>
         <div>
-            Next stars: {stars}⭐️
+            {{stars} ? (`Next stars: ` + JSON.stringify(stars) + `⭐️`) : (`error status: ` + {errorStatus})}
         </div>
         <br />
-        <div>
+        <div style={{display: `none`}}>
             Click{' '}
             <Link href={{ pathname: '/about', query: { name: 'Abcd' }}} prefetch scroll={false}>
                 <a>here</a>
             </Link>{' '}
             to read more
-        </div>
-        <div>
-            Click <span onClick={handler}>here</span> to error age
+            <div>
+                Click <span onClick={handler}>here</span> to error age
+            </div>
         </div>
     </div>
 ;
 
 Page.getInitialProps = async ({ req }) => {
     const res = await fetch('https://api.github.com/repos/zeit/next.js')
+    const errorStatus = res.status;
     const json = await res.json()
-    return { stars: json.stargazers_count }
+    return { stars: json.stargazers_count, errorStatus}
 };
 
 export default Page;
