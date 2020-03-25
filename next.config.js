@@ -17,8 +17,7 @@ module.exports = (phase, {defaultConfig}) => {
         exportPathMap: async function (defaultPathMap) {
             return {
               '/': { page: '/' },
-              '/about': { page: '/about' },
-              '/readme.md': { page: '/readme' }
+              '/about': { page: '/about' }
             }
           }
     };
