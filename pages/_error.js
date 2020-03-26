@@ -8,9 +8,23 @@ function Error({ statusCode }) {
     )
   }
 
-  Error.getInitialProps = ({ res, err }) => {
+  // Error.getInitialProps = ({ res, err }) => {
+  //   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
+  //   return { statusCode }
+  // }
+
+  // export async function getServerSideProps(context) {
+  export async function getServerSideProps({ res, err }) {
+    // return {
+    //   props: {}, // will be passed to the page component as props
+    // }
     const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-    return { statusCode }
+    return {
+      props:
+      {
+        statusCode
+      }
+    }
   }
 
   export default Error;

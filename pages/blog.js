@@ -40,7 +40,7 @@ function Blog({ posts }) {
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
-export async function getStaticProps() {
+export async function getStaticProps(ctx) {
   // Call an external API endpoint to get posts.
   const res = await fetch('https://preprod-api.apps.burberry.com/v1/ecom-env-proxy/rc1/pages//men/?country=CN&language=en');
   const response = await res.json();

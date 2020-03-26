@@ -4,7 +4,7 @@ import HelloBundle from './components/helloBundle';
 const DynamicComponent = dynamic(import('./components/hello'),
     {
         ssr: false,
-        loading: () => <p>...</p>
+        loading: () => <p>loading...</p>
     }
 )
 
@@ -18,8 +18,16 @@ const About = ({ name }) => (
     </div>
 );
 
-About.getInitialProps = async ({ query, pathname }) => {
-    return { name: query.name }
-};
+// About.getInitialProps = async ({ query, pathname }) => {
+//     return { name: query.name }
+// };
+
+export async function getServerSideProps({ query, pathname }) {
+    return {
+        props: {
+            name: query.name
+        }
+    }
+  }
 
 export default About;

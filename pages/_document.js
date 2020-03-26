@@ -5,10 +5,10 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
-  }
+  // static async getInitialProps(ctx) {
+  //   const initialProps = await Document.getInitialProps(ctx)
+  //   return { ...initialProps }
+  // }
 
   render() {
     return (
@@ -23,4 +23,9 @@ export default class MyDocument extends Document {
       </html>
     )
   }
+}
+
+export async function getServerSideProps(context) {
+  const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
 }

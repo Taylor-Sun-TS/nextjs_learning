@@ -53,11 +53,24 @@ const Page = ({ stars, errorStatus }) =>
     </div>
 ;
 
-Page.getInitialProps = async ({ req }) => {
-    const res = await fetch('https://api.github.com/repos/zeit/next.js')
+// Page.getInitialProps = async ({ req }) => {
+//     const res = await fetch('https://api.github.com/repos/zeit/next.js')
+//     const errorStatus = res.status;
+//     const json = await res.json()
+//     return { stars: json.stargazers_count, errorStatus}
+// };
+
+export async function getServerSideProps(ctx) {
+    const res = await fetch('https://api.github.com/repos/zeit/next.js');
     const errorStatus = res.status;
-    const json = await res.json()
-    return { stars: json.stargazers_count, errorStatus}
-};
+    const json = errorStatus == 200 ? await res.json() : null;
+
+    return {
+        props: {
+            errorStatus,
+            stars: json.stargazers_count,
+        }
+    }
+}
 
 export default Page;
