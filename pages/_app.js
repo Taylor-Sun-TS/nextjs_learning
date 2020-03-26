@@ -1,4 +1,4 @@
-import App, {Container} from 'next/app';
+import App from 'next/app';
 import React from 'react';
 import './styles.css';
 import Header from './components/header.js'
@@ -17,10 +17,12 @@ class MyApp extends App {
     render() {
         const { Component, pageProps } = this.props;
 
-        return (<container>
-            <Header />
-            <Component {...pageProps} />
-        </container>)
+        return (
+            <div>
+                <Header />
+                <Component {...pageProps} />
+            </div>
+        )
     }
 }
 

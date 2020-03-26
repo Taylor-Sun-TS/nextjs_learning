@@ -37,7 +37,7 @@ const Page = ({ stars, errorStatus }) =>
     <div>
         <h1>Welcome to next.js!</h1>
         <div>
-            {{stars} ? (`Next stars: ` + JSON.stringify(stars) + `⭐️`) : (`error status: ` + {errorStatus})}
+            {stars != null ? (`Next stars: ${JSON.stringify(stars)} ⭐️`) : (`error status: ${errorStatus}`)}
         </div>
         <br />
         <div style={{display: `none`}}>
@@ -68,7 +68,7 @@ export async function getServerSideProps(ctx) {
     return {
         props: {
             errorStatus,
-            stars: json.stargazers_count,
+            stars: json && json.stargazers_count,
         }
     }
 }
