@@ -15,3 +15,9 @@ body {
 .navigation_menus > * {
   margin-right: 30px;
 }
+
+.common_button {
+  width: 200px;
+  height: 44px;
+  font-size: 22px;
+}

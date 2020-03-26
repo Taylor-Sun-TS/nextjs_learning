@@ -3,5 +3,7 @@ export default (req, res) => {
       query: { pid },
     } = req
 
-    res.end(`Post: ${pid}`)
-  }
+    res.json({
+      text: `from server: ${pid}`
+    })
+}

@@ -10,14 +10,11 @@ function Post({ post }) {
     return <div>Loading...</div>
   }
 
-  // Render post...
   return (
-      <div>
-        <div>Only pathes 1,2 are allowd</div>
-        <div>current static path is: {post.id}</div>
-      </div>
+      <div>current static path is: {post.id}</div>
   )
 
+  // Render post...
 }
 
 // This function gets called at build time
@@ -27,7 +24,7 @@ export async function getStaticPaths() {
     paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
     // Enable statically generating additional pages
     // For example: `/posts/3`
-    fallback: false
+    fallback: true
   }
 }
 
